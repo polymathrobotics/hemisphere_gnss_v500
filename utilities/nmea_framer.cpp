@@ -23,7 +23,6 @@ void NMEA_FRAMER::nmea_sentences_split(size_t old_buff_size)
         return;
     }
 
-
     // try to optimize this loop if possible
     for (auto it = start_byte_it; it != end_byte_it; ++it) {
         auto byte = *it;
@@ -60,14 +59,20 @@ void NMEA_FRAMER::nmea_sentences_split(size_t old_buff_size)
             }
         }
     }
-    // this->nmea_bytes_clean(); // need to figure out a good way to do this
 }
 
 
 
 void NMEA_FRAMER::nmea_check_sum(std::string sentence)
 {
-    // implement nmea checksum logic here
+    auto it = std::find_if(sentence.begin(), sentence.end(), [](char i) {
+        return i == '*';
+    });
+
+    for (auto checksum_it = it; checksum_it != sentence.end(); ++checksum_it) {
+        // implement checksum logic here
+    }
+
 }
 
 void NMEA_FRAMER::nmea_bytes_clean()
