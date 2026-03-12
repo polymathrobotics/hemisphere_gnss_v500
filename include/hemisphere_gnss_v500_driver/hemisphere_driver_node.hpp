@@ -1,12 +1,12 @@
-// write the header file for the driver here
-
 #ifndef HEMISPHERE_DRIVER_NODE_HPP_
 #define HEMISPHERE_DRIVER_NODE_HPP_
 
 #include <memory>
 #include <string>
+#include <functional>
+#include <vector>
 
-#include "utilities/udp_socket_driver.hpp"
+#include "utilities/tcp_client.hpp"
 #include "utilities/nmea_parser.hpp"
 #include "utilities/nmea_framer.hpp"
 
@@ -15,13 +15,15 @@
 #include "rclcpp_components/register_node_macro.hpp"
 
 #include "sensor_msgs/msg/nav_sat_fix.hpp"
-#include "diagnostic_msgs/msg/diagnostic_status.hpp"
-
+#include "sensor_msgs/msg/imu.hpp"
 
 namespace hemisphere_gnss_v500_driver
 {
 
-class HemisphereDriverNode : public rclcpp::Node {
+
+using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
+
+class HemisphereDriverNode : public rclcpp_lifecycle::LifecycleNode {
 public:
   // Constructor
   explicit HemisphereDriverNode(const rclcpp::NodeOptions & options);
@@ -40,14 +42,16 @@ private:
     // receive bytes callback from the UDP socket driver
 
     void on_gps_bytes_receive(const std::vector<uint8_t>& bytes);
-    void publish_gps_msg(const GPSDataStruct& gps_data);
+    void publish_gps_position(const GPSPositionStruct& gps_position_data);
+    void publish_gps_orientation(const GPSOrientationStruct& gps_orientation_data);
     // ROS 2 Objects
-    rclcpp::Time::SharedPtr timer_;
-    rclcpp::Publisher<sensor_msgs::msg::NavSatFix>::SharedPtr gps_publisher_;
-    rclcpp::P
-    sensor_msgs::msg::NavSatFix gps_msg_;
+    rclcpp::TimerBase::SharedPtr timer_;
+    rclcpp_lifecycle::LifecyclePublisher<sensor_msgs::msg::NavSatFix>::SharedPtr gps_position_publisher_;
+    rclcpp_lifecycle::LifecyclePublisher<sensor_msgs::msg::Imu>::SharedPtr gps_orientation_publisher_;
+    sensor_msgs::msg::NavSatFix gps_position_msg_;
+    sensor_msgs::msg::Imu gps_orientation_msg_;
 
-    UDP_SOCKET_DRIVER udp_socket_driver_;
+    TCP_Client tcp_client_;
     NMEA_PARSER nmea_parser_;
     NMEA_FRAMER nmea_framer_;
     // State variables
