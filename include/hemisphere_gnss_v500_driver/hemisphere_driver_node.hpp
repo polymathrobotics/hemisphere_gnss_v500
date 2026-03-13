@@ -39,8 +39,7 @@ protected:
 
 private:
 
-    // receive bytes callback from the UDP socket driver
-
+    // private helpers and variables
     void on_gps_bytes_receive(const std::vector<uint8_t>& bytes);
     void publish_gps_position(const GPSPositionStruct& gps_position_data);
     void publish_gps_orientation(const GPSOrientationStruct& gps_orientation_data);

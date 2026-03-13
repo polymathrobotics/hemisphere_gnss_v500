@@ -144,6 +144,7 @@ void HemisphereDriverNode::publish_gps_position(const GPSPositionStruct& gps_pos
 
 void HemisphereDriverNode::publish_gps_orientation(const GPSOrientationStruct& gps_orientation_data)
 {
+  // TODO @aarush5 Implement IMU publishing as well soon
   (void)gps_orientation_data;
 }
 
