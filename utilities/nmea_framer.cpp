@@ -7,15 +7,6 @@ namespace hemisphere_gnss_v500_driver
 std::vector<std::string> NMEA_FRAMER::on_nmea_frame(std::vector<uint8_t> bytes)
 {
     std::lock_guard<std::mutex> lock(bytes_mutex);
-    RCLCPP_INFO(rclcpp::get_logger("nmea_framer"), "ARRIVED AT ON NMEA FRAMER");
-    std::stringstream ss;
-    for (uint8_t b : bytes) {
-        // This formats each byte as a 2-digit Hex (e.g., 0x24 for '$')
-        ss << std::hex << std::setfill('0') << std::setw(2) << static_cast<int>(b) << " ";
-    }
-
-    RCLCPP_INFO(rclcpp::get_logger("nmea_framer"), "Raw Hex: [ %s]", ss.str().c_str());
-
     nmea_sentences_.clear();
     this->nmea_sentences_split(bytes);
     return nmea_sentences_;
@@ -26,7 +17,7 @@ void NMEA_FRAMER::nmea_sentences_split(std::vector<uint8_t> bytes)
 
     auto start_byte_it = bytes.begin();
     auto end_byte_it = bytes.end();
-    RCLCPP_INFO(rclcpp::get_logger("nmea_framer"), "BEGINNING OF LOOP");
+
     if (start_byte_it > end_byte_it) {
         return;
     }
@@ -34,8 +25,7 @@ void NMEA_FRAMER::nmea_sentences_split(std::vector<uint8_t> bytes)
     for (auto it = start_byte_it; it != end_byte_it; ++it) {
         auto byte = *it;
 
-        if (byte == 36) { // '$' character indicates start of a new NMEA sentence
-             RCLCPP_INFO(rclcpp::get_logger("nmea_framer"), "reached beginning");
+        if (byte == 36) {
             current_sentence = "$";
             byte_start_ = true;
             byte_ending_flag = false;
@@ -44,9 +34,9 @@ void NMEA_FRAMER::nmea_sentences_split(std::vector<uint8_t> bytes)
             if (byte_start_) {
                 byte_ending_flag = true;
             } else {
-                // we got a carriage return without starting a sentence, ignore
+                continue;
             }
-        } else if (byte == 10) { // Note: Changed 26 to 10 for Line Feed (\n)
+        } else if (byte == 10) {
             if (byte_start_ && byte_ending_flag) {
                 if (nmea_check_sum(current_sentence)) {
                     nmea_sentences_.push_back(current_sentence);
@@ -55,19 +45,17 @@ void NMEA_FRAMER::nmea_sentences_split(std::vector<uint8_t> bytes)
                 byte_start_ = false;
                 byte_ending_flag = false;
             } else {
-                // we got a character without properly framing a sentence, ignore
+                continue;
             }
         } else {
             if (byte_start_) {
                 current_sentence += static_cast<char>(byte);
-                RCLCPP_INFO(rclcpp::get_logger("nmea_framer"), "Appending byte");
                 byte_ending_flag = false;
             } else {
-                // we got data bytes without starting a sentence, ignore
+                continue;
             }
         }
     }
-    RCLCPP_INFO(rclcpp::get_logger("nmea_framer"), "REACHED THE END OF BYTES");
 }
 
 
