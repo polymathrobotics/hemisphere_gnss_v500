@@ -1,4 +1,0 @@
-[35m[1mConsolidate compiler generated dependencies of target hemisphere_component[0m
-[ 28%] Built target hemisphere_driver_node
-[ 42%] [32mBuilding CXX object CMakeFiles/hemisphere_component.dir/src/hemisphere_driver_node.cpp.o[0m
-[ 57%] [32mBuilding CXX object CMakeFiles/hemisphere_component.dir/utilities/nmea_framer.cpp.o[0m
