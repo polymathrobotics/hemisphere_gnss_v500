@@ -1,0 +1,21 @@
+[ 71%] Built target hemisphere_component
+[100%] Built target hemisphere_driver_node
+-- Install configuration: "Release"
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/lib/hemisphere_gnss_v500_driver/hemisphere_driver_node
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/lib/libhemisphere_component.so
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/ament_index/resource_index/package_run_dependencies/hemisphere_gnss_v500_driver
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/ament_index/resource_index/parent_prefix_path/hemisphere_gnss_v500_driver
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/environment/ament_prefix_path.sh
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/environment/ament_prefix_path.dsv
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/environment/path.sh
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/environment/path.dsv
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/local_setup.bash
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/local_setup.sh
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/local_setup.zsh
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/local_setup.dsv
+-- Installing: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/package.dsv
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/ament_index/resource_index/packages/hemisphere_gnss_v500_driver
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/ament_index/resource_index/rclcpp_components/hemisphere_gnss_v500_driver
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/cmake/hemisphere_gnss_v500_driverConfig.cmake
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/cmake/hemisphere_gnss_v500_driverConfig-version.cmake
+-- Up-to-date: /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/install/hemisphere_gnss_v500_driver/share/hemisphere_gnss_v500_driver/package.xml

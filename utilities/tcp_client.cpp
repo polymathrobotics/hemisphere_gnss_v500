@@ -1,4 +1,4 @@
-#include "hemisphere_gnss_v500_driver/utilities/tcp_client.hpp"
+#include "tcp_client.hpp"
 
 namespace hemisphere_gnss_v500_driver
 {
@@ -78,7 +78,6 @@ void TCP_Client::run()
 void TCP_Client::receiveBytes()
 {
     const int timeout_ms = (timeout_s_ <= 0) ? 1000 : (timeout_s_ * 1000);
-
     while (running_) {
         pollfd pfd{};
         pfd.fd = sock_fd_;

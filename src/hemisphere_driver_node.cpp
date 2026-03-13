@@ -20,12 +20,18 @@ HemisphereDriverNode::HemisphereDriverNode(const rclcpp::NodeOptions & options)
 
 CallbackReturn HemisphereDriverNode::on_configure(const rclcpp_lifecycle::State &) {
 
+  RCLCPP_INFO(get_logger(), "Configured: Node is confgured");
   // declare publishers/subscribers below
   gps_position_publisher_ = this->create_publisher<sensor_msgs::msg::NavSatFix>(this->get_parameter("gps_position_topic").as_string(), 10);
   gps_orientation_publisher_ = this->create_publisher<sensor_msgs::msg::Imu>(this->get_parameter("gps_orientation_topic").as_string(), 10);
-  tcp_client_ = TCP_Client(this->get_parameter("ip_address").as_string(), this->get_parameter("port").as_int(), this->get_parameter("timeout_s").as_int(), this->get_parameter("buffer_size").as_int());
-  nmea_parser_ = NMEA_PARSER(); // need to pass in the bytes somehow
-  nmea_framer_ = NMEA_FRAMER();
+  tcp_client_ = std::make_unique<TCP_Client>(
+        this->get_parameter("ip_address").as_string(),
+        this->get_parameter("port").as_int(),
+        this->get_parameter("timeout_s").as_int(),
+        this->get_parameter("buffer_size").as_int()
+    );
+  nmea_parser_ = std::make_unique<NMEA_PARSER>();
+  nmea_framer_ = std::make_unique<NMEA_FRAMER>();
   return CallbackReturn::SUCCESS;
 }
 
@@ -33,10 +39,10 @@ CallbackReturn HemisphereDriverNode::on_configure(const rclcpp_lifecycle::State 
 CallbackReturn HemisphereDriverNode::on_activate(const rclcpp_lifecycle::State & state) {
   gps_position_publisher_->on_activate();
   gps_orientation_publisher_->on_activate();
-  tcp_client_.loadSocketConfigurations();
-  tcp_client_.sendCommand(this->get_parameter("nmea_command").as_string());
-  tcp_client_.setBytesCallback(std::bind(&HemisphereDriverNode::on_gps_bytes_receive, this, std::placeholders::_1));
-  tcp_client_.run();
+  tcp_client_->loadSocketConfigurations();
+  // tcp_client_->sendCommand(this->get_parameter("nmea_command").as_string());
+  tcp_client_->setBytesCallback(std::bind(&HemisphereDriverNode::on_gps_bytes_receive, this, std::placeholders::_1));
+  tcp_client_->run();
   RCLCPP_INFO(get_logger(), "Activated: Node is now processing data.");
   return CallbackReturn::SUCCESS;
 }
@@ -44,7 +50,7 @@ CallbackReturn HemisphereDriverNode::on_activate(const rclcpp_lifecycle::State &
 CallbackReturn HemisphereDriverNode::on_deactivate(const rclcpp_lifecycle::State & state) {
   gps_position_publisher_->on_deactivate();
   gps_orientation_publisher_->on_deactivate();
-  tcp_client_.disconnectFromServer();
+  tcp_client_->disconnectFromServer();
   RCLCPP_INFO(get_logger(), "Deactivated: Node is paused.");
   return CallbackReturn::SUCCESS;
 }
@@ -66,10 +72,9 @@ CallbackReturn HemisphereDriverNode::on_shutdown(const rclcpp_lifecycle::State &
 // need to figure out the input type somehow
 void HemisphereDriverNode::on_gps_bytes_receive(const std::vector<uint8_t>& bytes) {
 
-  RCLCPP_INFO(get_logger(), "Received %zu bytes", bytes.size());
-  nmea_sentences_ = nmea_framer_.on_nmea_frame(bytes);
+  nmea_sentences_ = nmea_framer_->on_nmea_frame(bytes);
   for (auto nmea_sentence: nmea_sentences_) {
-    NMEA_PARSER::NMEAParseResult result = nmea_parser_.on_nmea_parse(nmea_sentence);
+    NMEAParseResult result = nmea_parser_->on_nmea_parse(nmea_sentence);
     if (std::holds_alternative<hemisphere_gnss_v500_driver::GPSPositionStruct>(result)) {
       auto gps_position = std::get<hemisphere_gnss_v500_driver::GPSPositionStruct>(result);
       this->publish_gps_position(gps_position);

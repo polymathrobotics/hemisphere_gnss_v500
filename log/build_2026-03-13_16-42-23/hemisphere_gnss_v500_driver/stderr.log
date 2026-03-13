@@ -1,0 +1,18 @@
+In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+                 from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/tcp_client.hpp:12[m[K,
+                 from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/include/hemisphere_gnss_v500_driver/hemisphere_driver_node.hpp:9[m[K,
+                 from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/src/hemisphere_driver_node.cpp:1[m[K:
+[01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/src/hemisphere_driver_node.cpp:[m[K In member function ‘[01m[Kvoid hemisphere_gnss_v500_driver::HemisphereDriverNode::on_gps_bytes_receive(const std::vector<unsigned char, std::allocator<unsigned char> >&)[m[K’:
+[01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/src/hemisphere_driver_node.cpp:77:29:[m[K [01;35m[Kwarning: [m[Ktoo many arguments for format [[01;35m[K-Wformat-extra-args[m[K]
+   77 |   RCLCPP_INFO(get_logger(), [01;35m[K"SIZE"[m[K, nmea_sentences_.size());
+      |                             [01;35m[K^~~~~~[m[K

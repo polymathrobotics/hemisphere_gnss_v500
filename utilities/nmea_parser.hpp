@@ -4,13 +4,12 @@
 #include <vector>
 #include <variant>
 
-#include "hemisphere_gnss_v500_driver/utilities/gps_utils.hpp"
+#include "gps_utils.hpp"
 
 
 
 namespace hemisphere_gnss_v500_driver {
 
-using NMEAParseResult = std::variant<std::monostate, GPSPositionStruct, GPSOrientationStruct>;
  struct GPSPositionStruct {
   // Timing
     double timestamp;           // Unix/UTC time from the sensor
@@ -52,10 +51,13 @@ using NMEAParseResult = std::variant<std::monostate, GPSPositionStruct, GPSOrien
       bool is_valid;
   };
 
+  using NMEAParseResult = std::variant<std::monostate, GPSPositionStruct, GPSOrientationStruct>;
   class NMEA_PARSER
   {
   public:
-
+      // default constructor
+      NMEA_PARSER();
+      ~NMEA_PARSER();
       NMEAParseResult on_nmea_parse(const std::string& nmea_sentence);
 
   private:

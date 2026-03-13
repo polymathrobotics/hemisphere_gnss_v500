@@ -9,7 +9,7 @@
 #include <thread>
 #include <atomic>
 #include <functional>
-
+#include "rclcpp/rclcpp.hpp"
 // C / POSIX networking
 #include <sys/types.h>
 #include <sys/socket.h>

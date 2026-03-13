@@ -6,9 +6,9 @@
 #include <functional>
 #include <vector>
 
-#include "utilities/tcp_client.hpp"
-#include "utilities/nmea_parser.hpp"
-#include "utilities/nmea_framer.hpp"
+#include "tcp_client.hpp"
+#include "nmea_parser.hpp"
+#include "nmea_framer.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
@@ -51,9 +51,9 @@ private:
     sensor_msgs::msg::NavSatFix gps_position_msg_;
     sensor_msgs::msg::Imu gps_orientation_msg_;
 
-    TCP_Client tcp_client_;
-    NMEA_PARSER nmea_parser_;
-    NMEA_FRAMER nmea_framer_;
+    std::unique_ptr<TCP_Client> tcp_client_;
+    std::unique_ptr<NMEA_PARSER> nmea_parser_;
+    std::unique_ptr<NMEA_FRAMER> nmea_framer_;
     // State variables
     size_t count_;
     std::vector<std::string> nmea_sentences_;

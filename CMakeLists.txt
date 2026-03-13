@@ -1,29 +1,54 @@
 cmake_minimum_required(VERSION 3.8)
 project(hemisphere_gnss_v500_driver)
 
-if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
-endif()
-
-# find dependencies
+# 1. Find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(sensor_msgs)
-find_package(std_srvs)
+find_package(rclcpp REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
+find_package(rclcpp_components REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+# 2. Gather Utility Sources
+# Ensure your .cpp files for NMEA_PARSER/FRAMER are actually in this folder
+file(GLOB_RECURSE UTIL_SOURCES "utilities/*.cpp")
 
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # comment the line when a copyright and license is added to all source files
-  set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # comment the line when this package is in a git repo and when
-  # a copyright and license is added to all source files
-  set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
-endif()
+# 3. Create the Component Library
+# ROS 2 Components MUST be SHARED libraries
+add_library(hemisphere_component SHARED
+  src/hemisphere_driver_node.cpp
+  ${UTIL_SOURCES}
+)
 
+# 4. Include Directories
+target_include_directories(hemisphere_component PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/utilities>
+  $<INSTALL_INTERFACE:include>
+)
+
+# 5. Dependencies
+# This handles the linking for all ROS 2 headers and libraries
+ament_target_dependencies(hemisphere_component
+  rclcpp
+  rclcpp_lifecycle
+  rclcpp_components
+  sensor_msgs
+)
+
+# 6. Register the Component
+# This macro tells ROS 2 how to load your node as a plugin.
+# It ALSO generates a standalone executable automatically so you don't need 'add_executable'
+rclcpp_components_register_node(hemisphere_component
+  PLUGIN "hemisphere_gnss_v500_driver::HemisphereDriverNode"
+  EXECUTABLE hemisphere_driver_node
+)
+
+# 7. Install
+install(TARGETS hemisphere_component
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION lib/${PROJECT_NAME}
+)
+
+# 8. Export and Ament
 ament_package()

@@ -1,9 +1,13 @@
-#include "hemisphere_gnss_v500_driver/utilities/nmea_parser.hpp"
+#include "nmea_parser.hpp"
 
 namespace hemisphere_gnss_v500_driver
 {
 
-NMEA_PARSER::NMEAParseResult NMEA_PARSER::on_nmea_parse(const std::string& nmea_sentence)
+NMEA_PARSER::NMEA_PARSER() {}
+
+NMEA_PARSER::~NMEA_PARSER() {}
+
+NMEAParseResult NMEA_PARSER::on_nmea_parse(const std::string& nmea_sentence)
 {
     if (is_gga_sentence(nmea_sentence)) {
         return parse_gga(nmea_sentence);

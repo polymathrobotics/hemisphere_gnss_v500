@@ -1,0 +1,33 @@
+[0.036s] Invoking command in '/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/build/hemisphere_gnss_v500_driver': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/polymath_workspace/install/rqt_joint_trajectory_controller:/workspaces/polymath_workspace/install/ros2_lidar_processing:/workspaces/polymath_workspace/install/ros2_controllers_test_nodes:/workspaces/polymath_workspace/install/polymath_systemd_ros_client:/workspaces/polymath_workspace/install/pointcloud_to_image:/workspaces/polymath_workspace/install/kf_hungarian_tracker:/workspaces/polymath_workspace/install/lidar_test_bench:/opt/ros/humble /usr/bin/cmake --build /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/build/hemisphere_gnss_v500_driver -- -j20 -l20
+[0.158s] [35m[1mConsolidate compiler generated dependencies of target hemisphere_component[0m
+[0.191s] [ 28%] Built target hemisphere_driver_node
+[0.209s] [ 57%] [32mBuilding CXX object CMakeFiles/hemisphere_component.dir/utilities/nmea_framer.cpp.o[0m
+[0.209s] [ 57%] [32mBuilding CXX object CMakeFiles/hemisphere_component.dir/src/hemisphere_driver_node.cpp.o[0m
+[4.499s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:[m[K In member function ‘[01m[Kvoid hemisphere_gnss_v500_driver::NMEA_FRAMER::nmea_sentences_split(std::vector<unsigned char, std::allocator<unsigned char> >)[m[K’:
+[4.499s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:23:26:[m[K [01;31m[Kerror: [m[K‘[01m[Kbytes_accumulator_[m[K’ was not declared in this scope; did you mean ‘[01m[Kbytes_accumulator[m[K’?
+[4.499s]    23 |     auto start_byte_it = [01;31m[Kbytes_accumulator_[m[K.begin();
+[4.499s]       |                          [01;31m[K^~~~~~~~~~~~~~~~~~[m[K
+[4.499s]       |                          [32m[Kbytes_accumulator[m[K
+[4.725s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[4.725s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[4.725s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[4.725s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[4.726s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[4.726s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[4.726s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[4.726s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[4.727s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[4.727s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[4.727s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.727s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/tcp_client.hpp:12[m[K,
+[4.727s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/include/hemisphere_gnss_v500_driver/hemisphere_driver_node.hpp:9[m[K,
+[4.728s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/src/hemisphere_driver_node.cpp:1[m[K:
+[4.728s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/src/hemisphere_driver_node.cpp:[m[K In member function ‘[01m[Kvoid hemisphere_gnss_v500_driver::HemisphereDriverNode::on_gps_bytes_receive(const std::vector<unsigned char, std::allocator<unsigned char> >&)[m[K’:
+[4.728s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/src/hemisphere_driver_node.cpp:77:29:[m[K [01;35m[Kwarning: [m[Ktoo many arguments for format [[01;35m[K-Wformat-extra-args[m[K]
+[4.728s]    77 |   RCLCPP_INFO(get_logger(), [01;35m[K"SIZE"[m[K, nmea_sentences_.size());
+[4.728s]       |                             [01;35m[K^~~~~~[m[K
+[5.336s] gmake[2]: *** [CMakeFiles/hemisphere_component.dir/build.make:90: CMakeFiles/hemisphere_component.dir/utilities/nmea_framer.cpp.o] Error 1
+[5.337s] gmake[2]: *** Waiting for unfinished jobs....
+[11.692s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/hemisphere_component.dir/all] Error 2
+[11.693s] gmake: *** [Makefile:146: all] Error 2
+[11.699s] Invoked command in '/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/build/hemisphere_gnss_v500_driver' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/polymath_workspace/install/rqt_joint_trajectory_controller:/workspaces/polymath_workspace/install/ros2_lidar_processing:/workspaces/polymath_workspace/install/ros2_controllers_test_nodes:/workspaces/polymath_workspace/install/polymath_systemd_ros_client:/workspaces/polymath_workspace/install/pointcloud_to_image:/workspaces/polymath_workspace/install/kf_hungarian_tracker:/workspaces/polymath_workspace/install/lidar_test_bench:/opt/ros/humble /usr/bin/cmake --build /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/build/hemisphere_gnss_v500_driver -- -j20 -l20

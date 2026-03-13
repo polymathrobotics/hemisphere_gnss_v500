@@ -1,8 +1,8 @@
-hemisphere_gnss_v500_node:
+/**:
   ros__parameters:
 
-    ip_address: "192.168.1.100"
-    serial_port: 5005
+    ip_address: "127.0.0.1"
+    port: 5005
     timeout_s: 5
     gps_position_topic: "/gps/fix"
     gps_orientation_topic : "/gps/orientation/fix"

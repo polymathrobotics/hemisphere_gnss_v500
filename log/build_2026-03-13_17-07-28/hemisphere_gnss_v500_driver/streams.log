@@ -1,0 +1,157 @@
+[0.021s] Invoking command in '/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/build/hemisphere_gnss_v500_driver': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/polymath_workspace/install/rqt_joint_trajectory_controller:/workspaces/polymath_workspace/install/ros2_lidar_processing:/workspaces/polymath_workspace/install/ros2_controllers_test_nodes:/workspaces/polymath_workspace/install/polymath_systemd_ros_client:/workspaces/polymath_workspace/install/pointcloud_to_image:/workspaces/polymath_workspace/install/kf_hungarian_tracker:/workspaces/polymath_workspace/install/lidar_test_bench:/opt/ros/humble /usr/bin/cmake --build /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/build/hemisphere_gnss_v500_driver -- -j20 -l20
+[0.094s] [35m[1mConsolidate compiler generated dependencies of target hemisphere_component[0m
+[0.119s] [ 28%] Built target hemisphere_driver_node
+[0.130s] [ 42%] [32mBuilding CXX object CMakeFiles/hemisphere_component.dir/utilities/nmea_framer.cpp.o[0m
+[1.735s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[1.735s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[1.735s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[1.735s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[1.735s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[1.735s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[1.735s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[1.735s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[1.735s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[1.736s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.hpp:11[m[K,
+[1.736s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:1[m[K:
+[1.736s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:[m[K In member function ‘[01m[Kbool hemisphere_gnss_v500_driver::NMEA_FRAMER::nmea_check_sum(const string&)[m[K’:
+[1.736s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:79:22:[m[K [01;31m[Kerror: [m[K‘[01m[Kget_logger[m[K’ was not declared in this scope; did you mean ‘[01m[Krclcpp::get_logger[m[K’?
+[1.736s]    79 |         RCLCPP_DEBUG([01;31m[Kget_logger[m[K(), "Checksum: Invalid start or too short.");
+[1.736s]       |                      [01;31m[K^~~~~~~~~~[m[K
+[1.736s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:23[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[1.736s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.hpp:11[m[K,
+[1.736s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:1[m[K:
+[1.736s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logger.hpp:106:17:[m[K [01;36m[Knote: [m[K‘[01m[Krclcpp::get_logger[m[K’ declared here
+[1.736s]   106 |   friend Logger [01;36m[Krclcpp[m[K::get_logger(const std::string & name);
+[1.736s]       |                 [01;36m[K^~~~~~[m[K
+[1.736s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[1.736s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[1.737s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.hpp:11[m[K,
+[1.737s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:1[m[K:
+[1.737s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:79:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[1.737s]    79 |         [01;31m[KRCLCPP_DEBUG[m[K(get_logger(), "Checksum: Invalid start or too short.");
+[1.737s]       |         [01;31m[K^~~~~~~~~~~~[m[K
+[1.737s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:86:22:[m[K [01;31m[Kerror: [m[K‘[01m[Kget_logger[m[K’ was not declared in this scope; did you mean ‘[01m[Krclcpp::get_logger[m[K’?
+[1.737s]    86 |         RCLCPP_DEBUG([01;31m[Kget_logger[m[K(), "Checksum: No asterisk or missing hex digits.");
+[1.737s]       |                      [01;31m[K^~~~~~~~~~[m[K
+[1.737s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:23[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[1.737s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[1.737s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.hpp:11[m[K,
+[1.737s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:1[m[K:
+[1.738s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logger.hpp:106:17:[m[K [01;36m[Knote: [m[K‘[01m[Krclcpp::get_logger[m[K’ declared here
+[1.738s]   106 |   friend Logger [01;36m[Krclcpp[m[K::get_logger(const std::string & name);
+[1.738s]       |                 [01;36m[K^~~~~~[m[K
+[1.738s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[1.738s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.hpp:11[m[K,
+[1.738s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:1[m[K:
+[1.738s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:86:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[1.738s]    86 |         [01;31m[KRCLCPP_DEBUG[m[K(get_logger(), "Checksum: No asterisk or missing hex digits.");
+[1.738s]       |         [01;31m[K^~~~~~~~~~~~[m[K
+[1.738s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:104:22:[m[K [01;31m[Kerror: [m[K‘[01m[Kget_logger[m[K’ was not declared in this scope; did you mean ‘[01m[Krclcpp::get_logger[m[K’?
+[1.738s]   104 |         RCLCPP_ERROR([01;31m[Kget_logger[m[K(), "Checksum: Hex conversion failed for '%s'", hex_str.c_str());
+[1.738s]       |                      [01;31m[K^~~~~~~~~~[m[K
+[1.738s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:23[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[1.738s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[1.738s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.hpp:11[m[K,
+[1.739s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:1[m[K:
+[1.739s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logger.hpp:106:17:[m[K [01;36m[Knote: [m[K‘[01m[Krclcpp::get_logger[m[K’ declared here
+[1.739s]   106 |   friend Logger [01;36m[Krclcpp[m[K::get_logger(const std::string & name);
+[1.739s]       |                 [01;36m[K^~~~~~[m[K
+[1.739s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[1.739s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.hpp:11[m[K,
+[1.739s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:1[m[K:
+[1.739s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:104:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[1.739s]   104 |         [01;31m[KRCLCPP_ERROR[m[K(get_logger(), "Checksum: Hex conversion failed for '%s'", hex_str.c_str());
+[1.739s]       |         [01;31m[K^~~~~~~~~~~~[m[K
+[1.739s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:112:22:[m[K [01;31m[Kerror: [m[K‘[01m[Kget_logger[m[K’ was not declared in this scope; did you mean ‘[01m[Krclcpp::get_logger[m[K’?
+[1.739s]   112 |         RCLCPP_ERROR([01;31m[Kget_logger[m[K(), "Checksum MISMATCH! Calc: %02X, Sent: %02X | Sentence: %s",
+[1.739s]       |                      [01;31m[K^~~~~~~~~~[m[K
+[1.739s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:23[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[1.739s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[1.740s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.hpp:11[m[K,
+[1.740s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:1[m[K:
+[1.740s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logger.hpp:106:17:[m[K [01;36m[Knote: [m[K‘[01m[Krclcpp::get_logger[m[K’ declared here
+[1.740s]   106 |   friend Logger [01;36m[Krclcpp[m[K::get_logger(const std::string & name);
+[1.740s]       |                 [01;36m[K^~~~~~[m[K
+[1.740s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[1.740s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[1.740s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[1.740s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[1.740s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[1.740s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[1.740s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[1.740s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[1.740s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[1.740s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[1.740s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.hpp:11[m[K,
+[1.740s]                  from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:1[m[K:
+[1.740s] [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:112:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[1.740s]   112 |         [01;31m[KRCLCPP_ERROR[m[K(get_logger(), "Checksum MISMATCH! Calc: %02X, Sent: %02X | Sentence: %s",
+[1.740s]       |         [01;31m[K^~~~~~~~~~~~[m[K
+[2.050s] gmake[2]: *** [CMakeFiles/hemisphere_component.dir/build.make:90: CMakeFiles/hemisphere_component.dir/utilities/nmea_framer.cpp.o] Error 1
+[2.051s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/hemisphere_component.dir/all] Error 2
+[2.051s] gmake: *** [Makefile:146: all] Error 2
+[2.053s] Invoked command in '/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/build/hemisphere_gnss_v500_driver' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/workspaces/polymath_workspace/install/rqt_joint_trajectory_controller:/workspaces/polymath_workspace/install/ros2_lidar_processing:/workspaces/polymath_workspace/install/ros2_controllers_test_nodes:/workspaces/polymath_workspace/install/polymath_systemd_ros_client:/workspaces/polymath_workspace/install/pointcloud_to_image:/workspaces/polymath_workspace/install/kf_hungarian_tracker:/workspaces/polymath_workspace/install/lidar_test_bench:/opt/ros/humble /usr/bin/cmake --build /workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/build/hemisphere_gnss_v500_driver -- -j20 -l20

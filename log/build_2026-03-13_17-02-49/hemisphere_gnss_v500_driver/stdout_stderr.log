@@ -1,0 +1,23 @@
+[35m[1mConsolidate compiler generated dependencies of target hemisphere_component[0m
+[ 28%] Built target hemisphere_driver_node
+[ 42%] [32mBuilding CXX object CMakeFiles/hemisphere_component.dir/utilities/nmea_framer.cpp.o[0m
+In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+                 from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+                 from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.hpp:11[m[K,
+                 from [01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:1[m[K:
+[01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:[m[K In member function ‘[01m[Kstd::vector<std::__cxx11::basic_string<char> > hemisphere_gnss_v500_driver::NMEA_FRAMER::on_nmea_frame(std::vector<unsigned char, std::allocator<unsigned char> >)[m[K’:
+[01m[K/workspaces/polymath_workspace/src/hemisphere_gnss_v500_driver/utilities/nmea_framer.cpp:19:76:[m[K [01;31m[Kerror: [m[K‘[01m[Kbytes_as_str[m[K’ was not declared in this scope
+   19 |     RCLCPP_INFO(rclcpp::get_logger("nmea_framer"), "Received bytes: [%s]", [01;31m[Kbytes_as_str[m[K.c_str());
+      |                                                                            [01;31m[K^~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/hemisphere_component.dir/build.make:90: CMakeFiles/hemisphere_component.dir/utilities/nmea_framer.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/hemisphere_component.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
