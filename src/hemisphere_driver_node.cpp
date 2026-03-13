@@ -40,7 +40,7 @@ CallbackReturn HemisphereDriverNode::on_activate(const rclcpp_lifecycle::State &
   gps_position_publisher_->on_activate();
   gps_orientation_publisher_->on_activate();
   tcp_client_->loadSocketConfigurations();
-  // tcp_client_->sendCommand(this->get_parameter("nmea_command").as_string());
+  tcp_client_->sendCommand(this->get_parameter("nmea_command").as_string());
   tcp_client_->setBytesCallback(std::bind(&HemisphereDriverNode::on_gps_bytes_receive, this, std::placeholders::_1));
   tcp_client_->run();
   RCLCPP_INFO(get_logger(), "Activated: Node is now processing data.");
