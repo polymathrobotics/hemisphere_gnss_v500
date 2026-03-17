@@ -53,6 +53,46 @@ GPSPositionStruct NMEA_PARSER::parse_gga(const std::string& sentence) const
     return out;
 }
 
+bool NMEA_PARSER::is_gpgst_sentence(const std::string& sentence) const
+{
+    return sentence.rfind("$GPGST,", 0) == 0 || sentence.rfind("$GPGST,", 0) == 0;
+}
+
+GPSCovarianceStruct NMEA_PARSER::parse_gpgst(const std::string& sentence) const
+{
+    GPSCovarianceStruct out{};
+    out.is_valid = false;
+
+    // Split the sentence into fields (expects standard NMEA comma separation)
+    const std::vector<std::string> fields = gps_utils::split_fields_remove_checksum(sentence);
+
+    // GPGST typically has 9 fields + checksum
+    if (fields.size() < 9) {
+        return out;
+    }
+
+    // 1. Timestamp (UTC Time)
+    out.timestamp = gps_utils::parse_nmea_utc_time_to_seconds(fields[1]);
+
+    // 2. RMS value of the standard deviation of the range inputs
+    out.rms_deviation = gps_utils::safe_to_double(fields[2], 0.0);
+
+    // 3. Error Ellipse Standard Deviations
+    out.major_axis_std_dev = gps_utils::safe_to_double(fields[3], 0.0);
+    out.minor_axis_std_dev = gps_utils::safe_to_double(fields[4], 0.0);
+    out.major_axis_orientation = gps_utils::safe_to_double(fields[5], 0.0);
+
+    // 4. Latitude, Longitude, and Altitude Standard Deviations (The "Big Three")
+    out.lat_std_dev = gps_utils::safe_to_double(fields[6], 0.0);
+    out.lon_std_dev = gps_utils::safe_to_double(fields[7], 0.0);
+    out.alt_std_dev = gps_utils::safe_to_double(fields[8], 0.0);
+
+    // Validation: If we have 0.0 for all deviations, the data might be invalid/not yet calculated
+    out.is_valid = (out.lat_std_dev > 0.0 || out.lon_std_dev > 0.0);
+
+    return out;
+}
+
 bool NMEA_PARSER::is_heading_sentence(const std::string& sentence) const
 {
     return sentence.rfind("$GPHDT,", 0) == 0 || sentence.rfind("$GNHDT,", 0) == 0;

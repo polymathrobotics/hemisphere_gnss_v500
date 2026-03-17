@@ -59,7 +59,6 @@ void NMEA_FRAMER::nmea_sentences_split(std::vector<uint8_t> bytes)
 }
 
 
-
 bool NMEA_FRAMER::nmea_check_sum(const std::string& sentence)
 {
     // 1. Basic Validation

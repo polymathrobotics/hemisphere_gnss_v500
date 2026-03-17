@@ -14,7 +14,9 @@ HemisphereDriverNode::HemisphereDriverNode(const rclcpp::NodeOptions & options)
     this->declare_parameter<std::string>("gps_position_topic", "/gps/fix");
     this->declare_parameter<std::string>("gps_orientation_topic", "/gps/orientation/fix");
     this->declare_parameter<int>("buffer_size", 8192);
-    this->declare_parameter<std::string>("nmea_command", "$JASC,GPGGA,1");
+    this->declare_parameter<std::string>("nmea_position_command", "$JASC,GPGGA,1");
+    this->declare_parameter<std::string>("nmea_covariance_command", "$JASC,GPGST,1");
+    this->declare_parameter<int>("message_timeout_ms", 30);
 
 }
 
@@ -40,7 +42,8 @@ CallbackReturn HemisphereDriverNode::on_activate(const rclcpp_lifecycle::State &
   gps_position_publisher_->on_activate();
   gps_orientation_publisher_->on_activate();
   tcp_client_->loadSocketConfigurations();
-  tcp_client_->sendCommand(this->get_parameter("nmea_command").as_string());
+  tcp_client_->sendCommand(this->get_parameter("nmea_position_command").as_string());
+  tcp_client_->sendCommand(this->get_parameter("nmea_covariance_command").as_string());
   tcp_client_->setBytesCallback(std::bind(&HemisphereDriverNode::on_gps_bytes_receive, this, std::placeholders::_1));
   tcp_client_->run();
   RCLCPP_INFO(get_logger(), "Activated: Node is now processing data.");

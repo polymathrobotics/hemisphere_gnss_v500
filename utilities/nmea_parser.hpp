@@ -32,6 +32,26 @@ namespace hemisphere_gnss_v500_driver {
     bool is_valid;              // Flag to ensure data isn't stale or corrupted
   };
 
+  struct GPSCovarianceStruct {
+    // Timing
+    double timestamp;           // UTC time from the $GPGST sentence
+
+    // Range Statistics
+    double rms_deviation;       // Total RMS standard deviation of range inputs
+
+    // Error Ellipse (Calculated by the V500)
+    double major_axis_std_dev;  // Standard deviation of semi-major axis (meters)
+    double minor_axis_std_dev;  // Standard deviation of semi-minor axis (meters)
+    double major_axis_orientation; // Orientation of semi-major axis (degrees from True North)
+
+    // Axis-Specific Standard Deviations (The ones you need for NavSatFix)
+    double lat_std_dev;         // Standard deviation of latitude error (meters)
+    double lon_std_dev;         // Standard deviation of longitude error (meters)
+    double alt_std_dev;         // Standard deviation of altitude error (meters)
+
+    bool is_valid;              // True if parsing was successful and checksum passed
+  };
+
   struct GPSOrientationStruct {
       // Timing
       double timestamp;
@@ -51,7 +71,7 @@ namespace hemisphere_gnss_v500_driver {
       bool is_valid;
   };
 
-  using NMEAParseResult = std::variant<std::monostate, GPSPositionStruct, GPSOrientationStruct>;
+  using NMEAParseResult = std::variant<std::monostate, GPSPositionStruct, GPSCovarianceStruct, GPSOrientationStruct>;
   class NMEA_PARSER
   {
   public:
@@ -63,6 +83,8 @@ namespace hemisphere_gnss_v500_driver {
   private:
       bool is_gga_sentence(const std::string& sentence) const;
       GPSPositionStruct parse_gga(const std::string& sentence) const;
+      bool is_gpgst_sentence(const std::string& sentence) const;
+      GPSCovarianceStruct parse_gpgst(const std::string& sentence) const;
       bool is_heading_sentence(const std::string& sentence) const;
       GPSOrientationStruct parse_heading(const std::string& sentence) const;
 

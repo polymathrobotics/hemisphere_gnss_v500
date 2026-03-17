@@ -7,4 +7,6 @@
     gps_position_topic: "/gps/fix"
     gps_orientation_topic : "/gps/orientation/fix"
     buffer_size: 8192
-    nmea_command: "$JASC,GPGGA,1"
+    nmea_position_command: "$JASC,GPGGA,1"
+    nmea_covariance_command: "$JASC,GPGST,1"
+    message_timeout_ms: 30
