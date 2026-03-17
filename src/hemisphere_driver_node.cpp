@@ -15,6 +15,7 @@ HemisphereDriverNode::HemisphereDriverNode(const rclcpp::NodeOptions & options)
     this->declare_parameter<std::string>("gps_orientation_topic", "/gps/orientation/fix");
     this->declare_parameter<int>("buffer_size", 8192);
     this->declare_parameter<std::string>("nmea_command", "$JASC,GPGGA,1");
+    this->declare_parameter<std::string>("frame_id", "frame_id");
 
 }
 
@@ -77,11 +78,9 @@ void HemisphereDriverNode::on_gps_bytes_receive(const std::vector<uint8_t>& byte
     if (std::holds_alternative<hemisphere_gnss_v500_driver::GPSPositionStruct>(result)) {
       auto gps_position = std::get<hemisphere_gnss_v500_driver::GPSPositionStruct>(result);
       this->publish_gps_position(gps_position);
-      // handle position
     } else if (std::holds_alternative<hemisphere_gnss_v500_driver::GPSOrientationStruct>(result)) {
         auto gps_orientation = std::get<hemisphere_gnss_v500_driver::GPSOrientationStruct>(result);
         this->publish_gps_orientation(gps_orientation);
-        // handle orientation
     } else {
         return;
     }
