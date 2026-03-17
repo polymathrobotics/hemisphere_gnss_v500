@@ -69,7 +69,6 @@ CallbackReturn HemisphereDriverNode::on_shutdown(const rclcpp_lifecycle::State &
 }
 
 
-// need to figure out the input type somehow
 void HemisphereDriverNode::on_gps_bytes_receive(const std::vector<uint8_t>& bytes) {
 
   nmea_sentences_ = nmea_framer_->on_nmea_frame(bytes);
