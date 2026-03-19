@@ -6,10 +6,10 @@ namespace hemisphere_gnss_v500_driver
 {
 
 HemisphereDriverNode::HemisphereDriverNode(const rclcpp::NodeOptions & options)
-  : rclcpp_lifecycle::LifecycleNode("hemisphere_driver_node", options) {
+  : rclcpp_lifecycle::LifecycleNode("hemisphere_driver", options) {
 
     this->declare_parameter<std::string>("ip_address", "192.168.1.100");
-    this->declare_parameter<int>("port", 5005);
+    this->declare_parameter<int>("port", 5000);
     this->declare_parameter<int>("timeout_s", 5);
     this->declare_parameter<std::string>("gps_position_topic", "/gps/fix");
     this->declare_parameter<std::string>("gps_orientation_topic", "/gps/orientation/fix");
@@ -22,6 +22,17 @@ HemisphereDriverNode::HemisphereDriverNode(const rclcpp::NodeOptions & options)
 CallbackReturn HemisphereDriverNode::on_configure(const rclcpp_lifecycle::State &) {
 
   RCLCPP_INFO(get_logger(), "Configured: Node is confgured");
+  RCLCPP_INFO(get_logger(), "on_configure: Starting configuration...");
+
+  RCLCPP_INFO(get_logger(), "on_configure: IP Address: %s", this->get_parameter("ip_address").as_string().c_str());
+  RCLCPP_INFO(get_logger(), "on_configure: Port: %d", this->get_parameter("port").as_int());
+  RCLCPP_INFO(get_logger(), "on_configure: Timeout: %d", this->get_parameter("timeout_s").as_int());
+  RCLCPP_INFO(get_logger(), "on_configure: Buffer Size: %d", this->get_parameter("buffer_size").as_int());
+  RCLCPP_INFO(get_logger(), "on_configure: NMEA Command: %s", this->get_parameter("nmea_command").as_string().c_str());
+  RCLCPP_INFO(get_logger(), "on_configure: GPS Position Topic: %s", this->get_parameter("gps_position_topic").as_string().c_str());
+  RCLCPP_INFO(get_logger(), "on_configure: GPS Orientation Topic: %s", this->get_parameter("gps_orientation_topic").as_string().c_str());
+
+  RCLCPP_INFO(get_logger(), "on_configure: Creating publishers...");
   // declare publishers/subscribers below
   gps_position_publisher_ = this->create_publisher<sensor_msgs::msg::NavSatFix>(this->get_parameter("gps_position_topic").as_string(), 10);
   gps_orientation_publisher_ = this->create_publisher<sensor_msgs::msg::Imu>(this->get_parameter("gps_orientation_topic").as_string(), 10);
@@ -136,6 +147,7 @@ void HemisphereDriverNode::publish_gps_position(const GPSPositionStruct& gps_pos
     gps_position_msg_.position_covariance_type =
         sensor_msgs::msg::NavSatFix::COVARIANCE_TYPE_UNKNOWN;
   }
+  RCLCPP_INFO(this->get_logger(), "Publishing GPS: Lat: %f, Lon: %f", gps_position_msg_.latitude, gps_position_msg_.longitude);
 
   gps_position_publisher_->publish(gps_position_msg_);
 }

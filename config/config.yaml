@@ -2,7 +2,7 @@
   ros__parameters:
 
     ip_address: "192.168.100.1"
-    port: 5005
+    port: 5000
     timeout_s: 5
     gps_position_topic: "/gps/fix"
     gps_orientation_topic : "/gps/orientation/fix"

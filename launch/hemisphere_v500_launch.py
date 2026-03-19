@@ -30,7 +30,7 @@ def generate_launch_description():
     )
 
     configure_cmd = ExecuteProcess(
-        cmd=['ros2', 'lifecycle', 'set', '/hemisphere_driver', 'configure'],
+        cmd=['ros2', 'lifecycle', 'set', '--no-daemon', '/hemisphere_driver', 'configure'],
         output='screen'
     )
 
@@ -38,7 +38,7 @@ def generate_launch_description():
         period=2.0,
         actions=[
             ExecuteProcess(
-                cmd=['ros2', 'lifecycle', 'set', '/hemisphere_driver', 'activate'],
+                cmd=['ros2', 'lifecycle', 'set', '--no-daemon', '/hemisphere_driver', 'activate'],
                 output='screen'
             )
         ]
