@@ -1,0 +1,11 @@
+/**:
+  ros__parameters:
+
+    ip_address: "192.168.100.1"
+    port: 5000
+    timeout_s: 5
+    gps_position_topic: "/gps/fix"
+    gps_orientation_topic : "/gps/orientation/fix"
+    buffer_size: 8192
+    nmea_command: "$JASC,GPGGA,1"
+    frame_id: "frame_id"
