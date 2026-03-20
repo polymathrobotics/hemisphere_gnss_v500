@@ -16,6 +16,7 @@ HemisphereDriverNode::HemisphereDriverNode(const rclcpp::NodeOptions & options)
     this->declare_parameter<int>("buffer_size", 8192);
     this->declare_parameter<std::string>("nmea_command", "$JASC,GPGGA,1");
     this->declare_parameter<std::string>("frame_id", "frame_id");
+    this->declare_parameter<int>("connect_retry_interval_s", 5);
 
 }
 
@@ -40,7 +41,9 @@ CallbackReturn HemisphereDriverNode::on_configure(const rclcpp_lifecycle::State 
         this->get_parameter("ip_address").as_string(),
         this->get_parameter("port").as_int(),
         this->get_parameter("timeout_s").as_int(),
-        this->get_parameter("buffer_size").as_int()
+        this->get_parameter("buffer_size").as_int(),
+        this->get_parameter("connect_retry_interval_s").as_int(),
+        this->get_logger()
     );
   nmea_parser_ = std::make_unique<NMEA_PARSER>();
   nmea_framer_ = std::make_unique<NMEA_FRAMER>();
@@ -102,7 +105,7 @@ void HemisphereDriverNode::on_gps_bytes_receive(const std::vector<uint8_t>& byte
 void HemisphereDriverNode::publish_gps_position(const GPSPositionStruct& gps_position_data)
 {
   gps_position_msg_.header.stamp = now();
-  gps_position_msg_.header.frame_id = "gps_link";
+  gps_position_msg_.header.frame_id = this->get_parameter("frame_id").as_string();
   gps_position_msg_.latitude = gps_position_data.latitude;
   gps_position_msg_.longitude = gps_position_data.longitude;
   gps_position_msg_.altitude = gps_position_data.altitude;
