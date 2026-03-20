@@ -30,7 +30,9 @@ CallbackReturn HemisphereDriverNode::on_configure(const rclcpp_lifecycle::State 
         this->get_parameter("ip_address").as_string(),
         this->get_parameter("port").as_int(),
         this->get_parameter("timeout_s").as_int(),
-        this->get_parameter("buffer_size").as_int()
+        this->get_parameter("buffer_size").as_int(),
+        this->get_parameter("connect_retry_interval_s").as_int(),
+        this->get_logger()
     );
   nmea_parser_ = std::make_unique<NMEA_PARSER>();
   nmea_framer_ = std::make_unique<NMEA_FRAMER>();
@@ -72,7 +74,6 @@ CallbackReturn HemisphereDriverNode::on_shutdown(const rclcpp_lifecycle::State &
 }
 
 
-// need to figure out the input type somehow
 void HemisphereDriverNode::on_gps_bytes_receive(const std::vector<uint8_t>& bytes) {
 
   nmea_sentences_ = nmea_framer_->on_nmea_frame(bytes);
@@ -96,7 +97,7 @@ void HemisphereDriverNode::on_gps_bytes_receive(const std::vector<uint8_t>& byte
 void HemisphereDriverNode::publish_gps_position(const GPSPositionStruct& gps_position_data)
 {
   gps_position_msg_.header.stamp = now();
-  gps_position_msg_.header.frame_id = "gps_link";
+  gps_position_msg_.header.frame_id = this->get_parameter("frame_id").as_string();
   gps_position_msg_.latitude = gps_position_data.latitude;
   gps_position_msg_.longitude = gps_position_data.longitude;
   gps_position_msg_.altitude = gps_position_data.altitude;
@@ -141,6 +142,7 @@ void HemisphereDriverNode::publish_gps_position(const GPSPositionStruct& gps_pos
     gps_position_msg_.position_covariance_type =
         sensor_msgs::msg::NavSatFix::COVARIANCE_TYPE_UNKNOWN;
   }
+  RCLCPP_INFO(this->get_logger(), "Publishing GPS: Lat: %f, Lon: %f", gps_position_msg_.latitude, gps_position_msg_.longitude);
 
   gps_position_publisher_->publish(gps_position_msg_);
 }

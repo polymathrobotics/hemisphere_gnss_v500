@@ -8,6 +8,10 @@
 #include <stdexcept>
 #include <thread>
 #include <atomic>
+<<<<<<< HEAD
+=======
+#include <chrono>
+>>>>>>> main
 #include <functional>
 #include "rclcpp/rclcpp.hpp"
 // C / POSIX networking
@@ -15,6 +19,10 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+<<<<<<< HEAD
+=======
+#include <fcntl.h>
+>>>>>>> main
 #include <poll.h>
 #include <unistd.h>       // close()
 
@@ -34,7 +42,11 @@ namespace hemisphere_gnss_v500_driver
              * @param port The data port (usually 2000 or 1000)
              * @param timeout_s Timeout for the poll() loop in seconds
              */
+<<<<<<< HEAD
             TCP_Client(std::string ip_address, int port, int timeout_s, int buffer_size);
+=======
+            TCP_Client(std::string ip_address, int port, int timeout_s, int buffer_size, int connect_retry_interval_s, rclcpp::Logger logger);
+>>>>>>> main
 
             /**
              * @brief Default Constructor
@@ -88,6 +100,11 @@ namespace hemisphere_gnss_v500_driver
             int port_;
             int timeout_s_;
             int buffer_size_;
+<<<<<<< HEAD
+=======
+            int connect_retry_interval_s_;
+            rclcpp::Logger logger_;
+>>>>>>> main
 
             // Thread-safe state control
             std::atomic<bool> running_;

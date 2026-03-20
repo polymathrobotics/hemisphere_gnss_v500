@@ -2,11 +2,12 @@
   ros__parameters:
 
     ip_address: "192.168.100.1"
-    port: 5005
+    port: 5000
     timeout_s: 5
     gps_position_topic: "/gps/fix"
     gps_orientation_topic : "/gps/orientation/fix"
     buffer_size: 8192
     nmea_position_command: "$JASC,GPGGA,1"
     nmea_covariance_command: "$JASC,GPGST,1"
-    message_timeout_ms: 30
+    frame_id: "frame_id"
+    connect_retry_interval_s: 5
