@@ -1,32 +1,25 @@
 launch:
+  # 1. Start the Node
   - node:
-      pkg: hemisphere_gnss_v500_driver
-      exec: hemisphere_driver_node
-      name: hemisphere_driver
+      pkg: "hemisphere_gnss_v500_driver"
+      exec: "hemisphere_driver_node"
+      name: "hemisphere_driver"
       namespace: ""
-      output: screen
+      output: "screen"
       param:
-        - from: $(find-pkg-share hemisphere_gnss_v500_driver)/config/config.yaml
+        - from: "$(find-pkg-share hemisphere_gnss_v500_driver)/config/config.yaml"
 
-  - execute_process:
-      cmd:
-        - ros2
-        - lifecycle
-        - set
-        - --no-daemon
-        - /hemisphere_driver
-        - configure
-      output: screen
+  # 2. Configure the Lifecycle Node
+  - executable:
+      cmd: "ros2 lifecycle set /hemisphere_driver configure"
+      output: "screen"
+      shell: true
 
+  # 3. Activate the Lifecycle Node after a delay
   - timer:
-      period: 2.0
-      actions:
-        - execute_process:
-            cmd:
-              - ros2
-              - lifecycle
-              - set
-              - --no-daemon
-              - /hemisphere_driver
-              - activate
-            output: screen
+      period: 3.0
+      children: # <--- Changed from 'actions' to 'children'
+        - executable:
+            cmd: "ros2 lifecycle set /hemisphere_driver activate"
+            output: "screen"
+            shell: true
