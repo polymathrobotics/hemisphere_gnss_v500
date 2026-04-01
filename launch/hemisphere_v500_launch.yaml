@@ -1,0 +1,32 @@
+launch:
+  - node:
+      pkg: hemisphere_gnss_v500_driver
+      exec: hemisphere_driver_node
+      name: hemisphere_driver
+      namespace: ""
+      output: screen
+      param:
+        - from: $(find-pkg-share hemisphere_gnss_v500_driver)/config/config.yaml
+
+  - execute_process:
+      cmd:
+        - ros2
+        - lifecycle
+        - set
+        - --no-daemon
+        - /hemisphere_driver
+        - configure
+      output: screen
+
+  - timer:
+      period: 2.0
+      actions:
+        - execute_process:
+            cmd:
+              - ros2
+              - lifecycle
+              - set
+              - --no-daemon
+              - /hemisphere_driver
+              - activate
+            output: screen

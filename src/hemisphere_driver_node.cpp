@@ -84,28 +84,35 @@ CallbackReturn HemisphereDriverNode::on_shutdown(const rclcpp_lifecycle::State &
 }
 
 
-void HemisphereDriverNode::on_gps_bytes_receive(const std::vector<uint8_t>& bytes) {
+void HemisphereDriverNode::on_gps_bytes_receive(const std::vector<uint8_t>& bytes)
+{
+    // Frame the raw bytes into individual NMEA strings
+    nmea_sentences_ = nmea_framer_->on_nmea_frame(bytes);
 
-  nmea_sentences_ = nmea_framer_->on_nmea_frame(bytes);
-  for (auto nmea_sentence: nmea_sentences_) {
-    NMEAParseResult result = nmea_parser_->on_nmea_parse(nmea_sentence);
-    if (std::holds_alternative<hemisphere_gnss_v500_driver::GPSPositionStruct>(result)) {
-      auto gps_position = std::get<hemisphere_gnss_v500_driver::GPSPositionStruct>(result);
-      this->publish_gps_position(gps_position);
-    } else if (std::holds_alternative<hemisphere_gnss_v500_driver::GPSOrientationStruct>(result)) {
-        auto gps_orientation = std::get<hemisphere_gnss_v500_driver::GPSOrientationStruct>(result);
-        this->publish_gps_orientation(gps_orientation);
-    } else {
-        return;
+    for (const auto& nmea_sentence : nmea_sentences_) {
+        NMEAParseResult result = nmea_parser_->on_nmea_parse(nmea_sentence);
+
+        // 1. Check for Combined Fix (Position + Covariance bundle)
+        if (auto* combined = std::get_if<hemisphere_gnss_v500_driver::NavSatFix>(&result)) {
+            this->publish_gps_position(combined->position);
+        }
+        else if (auto* gps_position = std::get_if<hemisphere_gnss_v500_driver::GPSPositionStruct>(&result)) {
+            this->publish_gps_position(*gps_position);
+        }
+        else if (auto* gps_orientation = std::get_if<hemisphere_gnss_v500_driver::GPSOrientationStruct>(&result)) {
+            this->publish_gps_orientation(*gps_orientation);
+        }
+        else {
+            continue;
+        }
     }
-  }
-
 }
 
-void HemisphereDriverNode::publish_gps_position(const GPSPositionStruct& gps_position_data)
+void HemisphereDriverNode::publish_gps_position(const hemisphere_gnss_v500_driver::GPSPositionStruct& gps_position_data)
 {
   gps_position_msg_.header.stamp = now();
   gps_position_msg_.header.frame_id = this->get_parameter("frame_id").as_string();
+
   gps_position_msg_.latitude = gps_position_data.latitude;
   gps_position_msg_.longitude = gps_position_data.longitude;
   gps_position_msg_.altitude = gps_position_data.altitude;
@@ -114,6 +121,9 @@ void HemisphereDriverNode::publish_gps_position(const GPSPositionStruct& gps_pos
     gps_position_msg_.status.status = sensor_msgs::msg::NavSatStatus::STATUS_NO_FIX;
   } else if (gps_position_data.fix_quality == 2) {
     gps_position_msg_.status.status = sensor_msgs::msg::NavSatStatus::STATUS_SBAS_FIX;
+  } else if (gps_position_data.fix_quality == 4 || gps_position_data.fix_quality == 5) {
+
+    gps_position_msg_.status.status = sensor_msgs::msg::NavSatStatus::STATUS_GBAS_FIX;
   } else {
     gps_position_msg_.status.status = sensor_msgs::msg::NavSatStatus::STATUS_FIX;
   }
@@ -122,35 +132,33 @@ void HemisphereDriverNode::publish_gps_position(const GPSPositionStruct& gps_pos
 
   if (gps_position_data.lat_std_dev > 0.0 &&
       gps_position_data.lon_std_dev > 0.0 &&
-      gps_position_data.alt_std_dev > 0.0) {
-    gps_position_msg_.position_covariance[0] =
-        gps_position_data.lat_std_dev * gps_position_data.lat_std_dev;
+      gps_position_data.alt_std_dev > 0.0)
+  {
+    gps_position_msg_.position_covariance[0] = std::pow(gps_position_data.lat_std_dev, 2);
     gps_position_msg_.position_covariance[1] = 0.0;
     gps_position_msg_.position_covariance[2] = 0.0;
     gps_position_msg_.position_covariance[3] = 0.0;
-    gps_position_msg_.position_covariance[4] =
-        gps_position_data.lon_std_dev * gps_position_data.lon_std_dev;
+    gps_position_msg_.position_covariance[4] = std::pow(gps_position_data.lon_std_dev, 2);
     gps_position_msg_.position_covariance[5] = 0.0;
     gps_position_msg_.position_covariance[6] = 0.0;
     gps_position_msg_.position_covariance[7] = 0.0;
-    gps_position_msg_.position_covariance[8] =
-        gps_position_data.alt_std_dev * gps_position_data.alt_std_dev;
+    gps_position_msg_.position_covariance[8] = std::pow(gps_position_data.alt_std_dev, 2);
+
     gps_position_msg_.position_covariance_type =
         sensor_msgs::msg::NavSatFix::COVARIANCE_TYPE_DIAGONAL_KNOWN;
-  } else {
-    gps_position_msg_.position_covariance[0] = 0.0;
-    gps_position_msg_.position_covariance[1] = 0.0;
-    gps_position_msg_.position_covariance[2] = 0.0;
-    gps_position_msg_.position_covariance[3] = 0.0;
-    gps_position_msg_.position_covariance[4] = 0.0;
-    gps_position_msg_.position_covariance[5] = 0.0;
-    gps_position_msg_.position_covariance[6] = 0.0;
-    gps_position_msg_.position_covariance[7] = 0.0;
-    gps_position_msg_.position_covariance[8] = 0.0;
+  }
+  else
+  {
+    gps_position_msg_.position_covariance.fill(0.0);
     gps_position_msg_.position_covariance_type =
         sensor_msgs::msg::NavSatFix::COVARIANCE_TYPE_UNKNOWN;
   }
-  RCLCPP_INFO(this->get_logger(), "Publishing GPS: Lat: %f, Lon: %f", gps_position_msg_.latitude, gps_position_msg_.longitude);
+
+  RCLCPP_DEBUG(this->get_logger(),
+               "Publishing Fix: [Lat: %f, Lon: %f, Qual: %d]",
+               gps_position_msg_.latitude,
+               gps_position_msg_.longitude,
+               gps_position_data.fix_quality);
 
   gps_position_publisher_->publish(gps_position_msg_);
 }
