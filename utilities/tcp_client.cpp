@@ -14,7 +14,6 @@ TCP_Client::TCP_Client(std::string ip_address, int port, int timeout_s, int buff
 
 void TCP_Client::loadSocketConfigurations()
 {
-    // Don't reconnect if we are already up
     if (sock_fd_ >= 0) {
         return;
     }

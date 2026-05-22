@@ -3,15 +3,13 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
-from launch.actions import ExecuteProcess, TimerAction
+from launch.actions import ExecuteProcess, TimerAction, RegisterEventHandler
+from launch.event_handlers import OnProcessStart
 
 def generate_launch_description():
-
-    config_path = os.path.join(
-        get_package_share_directory('hemisphere_gnss_v500_driver'),
-        'config',
-        'config.yaml'
-    )
+    # Use join for path safety
+    pkg_share = get_package_share_directory('hemisphere_gnss_v500_driver')
+    config_path = os.path.join(pkg_share, 'config', 'config.yaml')
 
     hemisphere_node = ComposableNode(
         package='hemisphere_gnss_v500_driver',
@@ -29,16 +27,23 @@ def generate_launch_description():
         output='screen',
     )
 
-    configure_cmd = ExecuteProcess(
-        cmd=['ros2', 'lifecycle', 'set', '--no-daemon', '/hemisphere_driver', 'configure'],
-        output='screen'
-    )
-
-    activate_cmd = TimerAction(
-        period=2.0,
+    # 1. Configure the node 1 second after the container starts
+    configure_event = TimerAction(
+        period=1.5,
         actions=[
             ExecuteProcess(
-                cmd=['ros2', 'lifecycle', 'set', '--no-daemon', '/hemisphere_driver', 'activate'],
+                cmd=['ros2', 'lifecycle', 'set', '/hemisphere_driver', 'configure'],
+                output='screen'
+            )
+        ]
+    )
+
+    # 2. Activate the node 3 seconds after the container starts
+    activate_event = TimerAction(
+        period=4.0,
+        actions=[
+            ExecuteProcess(
+                cmd=['ros2', 'lifecycle', 'set', '/hemisphere_driver', 'activate'],
                 output='screen'
             )
         ]
@@ -46,6 +51,6 @@ def generate_launch_description():
 
     return LaunchDescription([
         container,
-        configure_cmd,
-        activate_cmd
+        configure_event,
+        activate_event
     ])

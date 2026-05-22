@@ -92,7 +92,6 @@ bool NMEA_FRAMER::nmea_check_sum(const std::string& sentence)
         return false;
     }
 
-    // 6. Compare
     bool match = (computed_checksum == static_cast<uint8_t>(transmitted_checksum));
 
     if (!match) {
